@@ -1,0 +1,69 @@
+// Daniel Shiffman
+// Kinect Point Cloud example
+
+// https://github.com/shiffman/OpenKinect-for-Processing
+// http://shiffman.net/p5/kinect/
+
+import org.openkinect.freenect.*;
+import org.openkinect.processing.*;
+
+// Kinect Library object
+Kinect kinect;
+
+float deg;
+
+PImage img;
+
+
+void setup() {
+  // Rendering in P3D
+  size(600, 480);
+  kinect = new Kinect(this);
+  kinect.initDepth();
+  
+  img = createImage( kinect.width, kinect.height, RGB);
+}
+
+void draw() {
+
+  background(0);
+  
+  img.loadPixels();
+
+  // Get the raw depth as array of integers
+  int[] depth = kinect.getRawDepth();
+
+
+  for (int x = 0; x < kinect.width; x ++) {
+    for (int y = 0; y < kinect.height; y ++) {
+      int offset = x + y*kinect.width;
+      int d = depth[offset];
+      
+      
+      
+      if( d > 300 & d > 1500){
+        img.pixels[offset] = color(255, 0, 255);
+      } 
+      else
+      {
+         img.pixels[offset] = color(0);
+      }
+    }
+  }
+  
+  
+  img.updatePixels();
+  image(img, 0, 0);
+}
+
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == UP) {
+      deg++;
+    } else if (keyCode == DOWN) {
+      deg--;
+    }
+    deg = constrain(deg, 0, 30);
+    kinect.setTilt(deg);
+  }
+}
