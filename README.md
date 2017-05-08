@@ -3,4 +3,4 @@ Código perteneciente a serie de video tutoriales sobre el uso de Kinect con Pro
 
 
 Primer video: Introducción + setup + ejemplos
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0X7gTJdxgHQ" frameborder="0" allowfullscreen></iframe>
+https://www.youtube.com/watch?v=0X7gTJdxgHQ
